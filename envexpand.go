@@ -8,7 +8,12 @@ import (
 
 var re = regexp.MustCompile(`^\${([a-zA-Z][a-zA-Z0-9_]*)}`)
 
-func Expand(template string) string {
+func Expand(template []byte) []byte {
+	str := ExpandString(string(template))
+	return []byte(str)
+}
+
+func ExpandString(template string) string {
 	ret := make([]byte, 0)
 
 	for len(template) > 0 {
